@@ -11,15 +11,13 @@ import time
 def init_browser():
     # @NOTE: Replace the path with your actual path to the chromedriver
     executable_path = {'executable_path': 'chromedriver.exe'}
-    browser = Browser('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=True)
+    return browser    
 
 def scrape():
+    # browser = Browser('chrome', executable_path="chromedriver", headless=False)
     browser = init_browser()
    
-
-
-
-
 
     # URL of page to be scraped
     url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
@@ -30,13 +28,14 @@ def scrape():
 
 
     # find the title
-    title_options = soup.find_all('div', class_='list_text')
-    news_title = title_options[0].a.text
+    list_options = soup.find_all('div', class_='list_text')
+    news_title = list_options[0].a.text
     print(news_title)
     #find paragraph
-    paragraph_options = soup.find_all('div', class_='list_text')
-    news_p = paragraph_options[0].get_text()
+    # paragraph_options = soup.find_all('div', class_='list_text')
+    news_p = list_options[0].get_text()
     print(news_p)
+    
     time.sleep(2)
 
 
@@ -92,7 +91,7 @@ def scrape():
 
 
     #get titles
-    hemisphere_titles = []
+    hemisphere_titles =[]
     all_titles = soup.find_all('div', class_='collapsible results')
     title = all_titles[0].find_all('h3')
     title
@@ -142,8 +141,11 @@ def scrape():
     }
     
     browser.quit()
+    print(mars_facts)
+    return browser
 
-    return mars_facts
+if __name__ == "__main__":
+    scrape()
 
 
 
