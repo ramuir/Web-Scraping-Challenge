@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Bars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div clas="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <!-- surf data -->
+    <div class="row">
+      <div class="col-md-12" style = "padding: padding 5%">
+        <h3>Latest Mars News</h3>
+        <h5>{{ mars_facts.news_title }}</h5>
+        <p>{{ mars_facts.news_p }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class = "row">
+  <div class="col-md-8">
+  <h3>Featured Mars Image</h3>
+  <img  src =  "{{mars_facts.featured_image_url}}">
+    
+  <div class = "col-md-4">
+        <h3>Mars facts</h3>
+        <table class="dataframe">
+            <tbody>
+              
+                {% for i in mars_df %}
+                  <tr>
+                    <td>{{ i['Variable'] }}</td>
+                    <td>{{ i['Value'] }}</td>
+                  </tr>
+                {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+
+</div>
+</div>
+<br>
+<
+
+
+</body>
+</html>
